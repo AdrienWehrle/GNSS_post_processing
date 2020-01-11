@@ -1,6 +1,4 @@
-# GNSS_post_processing
-Code developed as part of an internship at the University of Oslo (UiO): "Post-processing and analysing GNSS records of glacier motion in Svalbard in relation to a potential hydrometeorological forcing".
-
+# GNSS post processing 
 ## Abstract
 Glacier dynamics remain a major source of uncertainty in sea level rise predictions (Stocker et al., 2013)
 and therefore still need to be better understood in places like Svalbard, known as one of the most climatically
