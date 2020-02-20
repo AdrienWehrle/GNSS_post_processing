@@ -1,4 +1,3 @@
-# GNSS post processing 
 ## Abstract
 Glacier dynamics remain a major source of uncertainty in sea level rise predictions (Stocker et al., 2013)
 and therefore still need to be better understood in places like Svalbard, known as one of the most climatically
