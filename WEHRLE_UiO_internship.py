@@ -6,7 +6,7 @@ import matplotlib.cm as cm
 from datetime import datetime, timedelta
 import time
 import pickle
-from kneed import KneeLocator #download: https://github.com/arvkevi/kneed
+from kneed import KneeLocator #dhttps://github.com/arvkevi/kneed
 from collections import Counter
 import scipy.stats as stats
 from scipy.stats import linregress
