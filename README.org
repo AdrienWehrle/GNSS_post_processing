@@ -1,4 +1,18 @@
-## Abstract
+** Development Environment
+
++ These methods have been developed using a conda virtual environment that can be identically recreated. To this end, create a new      
+  environment using [[./GNSS_post_processing.yml]] as below:
+  #+BEGIN_SRC bash :results verbatim
+  conda env create -f GNSS_post_processing.yml
+  #+END_SRC
+  =ResolvePackageNotFound= error can be raised. In that case, run =conda env export --no-builds > GNSS_post_processing.yml= instead. \\
+  Then, run =conda activate GNSS_post_processing= to activate this new virtual environment.
+
++ The repository can also be run interactively on Binder, without any download:
+
+  [[https://mybinder.org/v2/gh/AdrienWehrle/GNSS_post_processing/master][https://mybinder.org/badge_logo.svg]]
+
+** Abstract
 Glacier dynamics remain a major source of uncertainty in sea level rise predictions (Stocker et al., 2013)
 and therefore still need to be better understood in places like Svalbard, known as one of the most climatically
 sensitive regions in the world (Rogers et al., 2005). 
@@ -16,7 +30,7 @@ model outputs showed that even at this scale, various processes associated with 
 forcing can ben explained. It is therefore highly encouraging for further temporal resolution investigations and
 thus, for a better understanding of short-term glacier dynamics.
 
-### References
+*** References
 
 Helbing, J.: Glacier dynamics of Unteraargletscher: verifying theoretical concepts through flow modeling, Ph.D. thesis, ETH Zurich, 2005.
 
@@ -24,7 +38,7 @@ Midgley, P. M., et al.: Climate change 2013: The physical science basis, 2013.
 
 Rogers, J. C., Yang, L., and Li, L.: The role of Fram Strait winter cyclones on sea ice flux and on Spitsbergen air temperatures, Geophysical Research Letters, 32, 2005.
 
-Satopaa, V., Albrecht, J., Irwin, D., and Raghavan, B.: Finding a" kneedle" in a haystack: Detecting knee points
+Satopaa, V., Albrecht, J., Irwin, D., and Raghavan, B.: Finding a " kneedle" in a haystack: Detecting knee points
 in system behavior, in: 2011 31st international conference on distributed computing systems workshops, pp.166-171, IEEE, 2011.
 
 Stocker, T. F., Qin, D., Plattner, G.-K., Tignor, M., Allen, S. K., Boschung, J., Nauels, A., Xia, Y., Bex, V.,Midgley, P. M., et al.: Climate change 2013: The physical science basis, 2013.
