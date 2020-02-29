@@ -1,7 +1,6 @@
 ** Development Environment
 
-+ These methods have been developed using a conda virtual environment that can be identically recreated. To this end, create a new      
-  environment using [[./GNSS_post_processing.yml]] as below:
++ These methods have been implemented and developed using a conda virtual environment that can be identically recreated. To this end, create a new environment using [[./GNSS_post_processing.yml]] as below:
   #+BEGIN_SRC bash :results verbatim
   conda env create -f GNSS_post_processing.yml
   #+END_SRC
