@@ -28,10 +28,10 @@ Feel free to improve it!
 def SDF_EM(df,sd_threshold=np.nanmean(df.global_sd),fq='24H',sampling_fq='1H',w_min=0,w_max=3*np.nanstd(df.global_sd),w_step=0.0001,temporal_resolution=False,representation=False,save=False):
     ''' Determination of the SDF method's optimal threshold (step 2) with the help of the Elbow Method (from w_min to w_max each w_step) 
     to compute daily velocities (see Adrien Wehrlé's internship report).
-    If temporal_resolution=True, velocities are computed for each temporal 
+    If temporal_resolution==True, velocities are computed for each temporal 
     resolutions (24, 12, 8, 6, 3 and 1 hour).
-    If save=True, the resulted velocities are saved in a pickle file (if temporal_resolution=True) or a csv file (if temporal_resolution=False).
-    If representation=True, results of the Elbow Method and velocities are displayed.
+    If save==True, the resulted velocities are saved in a pickle file (if temporal_resolution==True) or a csv file (if temporal_resolution=False).
+    If representation==True, results of the Elbow Method and velocities are displayed.
     '''
     
     def SDF(df,sd_threshold=np.nanmean(df.global_sd),fq='24H',sampling_fq='1H',w_min=0,w_max=3*np.nanstd(df.global_sd)):
@@ -186,7 +186,7 @@ def SDF_EM(df,sd_threshold=np.nanmean(df.global_sd),fq='24H',sampling_fq='1H',w_
         return SDF_velocity,SDF_vertvelocity
     
     
-    if temporal_resolution==True:
+    if temporal_resolution:
         
         freqs=np.array([['24H','1H'],['12H','1H'],['8H','1H'],['6H','1H'],['3H','1H'],['1H','1T']])
         #global_sds=np.arange(0.7*np.mean(df.global_sd),3*np.mean(df.global_sd),0.0001) 
@@ -224,7 +224,7 @@ def SDF_EM(df,sd_threshold=np.nanmean(df.global_sd),fq='24H',sampling_fq='1H',w_
             SDF_velocities.append(SDF_velocity)
             
             #Results representation
-            if representation==True:
+            if representation:
                 plt.figure()
                 plt.subplot(211)
                 plt.plot(global_sd_range[:j+1],missval,color='black',label='',alpha=0.5)
@@ -242,7 +242,7 @@ def SDF_EM(df,sd_threshold=np.nanmean(df.global_sd),fq='24H',sampling_fq='1H',w_
             
         results=({'24H':SDF_velocities[0],'12H':SDF_velocities[1],'8H':SDF_velocities[2],'6H':SDF_velocities[3],'3H':SDF_velocities[4],'1H':SDF_velocities[5]})
         
-        if save==True:
+        if save:
             f = open("SDF_method.pkl","wb")
             pickle.dump(results,f)
             f.close()
@@ -279,7 +279,7 @@ def SDF_EM(df,sd_threshold=np.nanmean(df.global_sd),fq='24H',sampling_fq='1H',w_
             results=pd.DataFrame([SDF_velocity,SDF_vertvelocity])
             
             #Results representation
-            if representation==True:
+            if representation:
                 plt.figure()
                 plt.subplot(211)
                 plt.plot(global_sd_range[:j+1],missval,color='black',label='',alpha=0.5)
@@ -292,7 +292,7 @@ def SDF_EM(df,sd_threshold=np.nanmean(df.global_sd),fq='24H',sampling_fq='1H',w_
                 plt.xlabel('Time (year-month)',fontsize=16)
                 plt.ylabel('Velocity (meters/day)',fontsize=16)
 
-        if save==True:
+        if save:
             results.to_csv('SDF_method.csv')
         
     return results
@@ -441,7 +441,7 @@ def RF_EM(df,ratio_threshold=np.nanmean(df.ratio),w_min=0,w_max=3*np.nanstd(df.r
               
         return RF_velocity,RF_vertvelocity
     
-    if temporal_resolution==True:
+    if temporal_resolution:
         
         freqs=np.array([['24H','1H'],['12H','1H'],['8H','1H'],['6H','1H'],['3H','1H'],['1H','1T']])
         ratios_range=np.arange(w_min,w_max,w_step)
@@ -479,7 +479,7 @@ def RF_EM(df,ratio_threshold=np.nanmean(df.ratio),w_min=0,w_max=3*np.nanstd(df.r
             RF_velocities.append(RF_velocity)
             
             #Results representation
-            if representation==True:
+            if representation:
                 plt.figure()
                 plt.subplot(211)
                 plt.plot(ratios_range[:j+1],missval,color='black',label='',alpha=0.5)
@@ -498,7 +498,7 @@ def RF_EM(df,ratio_threshold=np.nanmean(df.ratio),w_min=0,w_max=3*np.nanstd(df.r
             results=({'24H':RF_velocities[0],'12H':RF_velocities[1],'8H':RF_velocities[2],'6H':RF_velocities[3],'3H':RF_velocities[4],'1H':RF_velocities[5]})
        
         
-            if save==True:
+            if save:
                 f = open("RF_method.pkl","wb")
                 pickle.dump(results,f)
                 f.close()
@@ -535,7 +535,7 @@ def RF_EM(df,ratio_threshold=np.nanmean(df.ratio),w_min=0,w_max=3*np.nanstd(df.r
                 results=pd.DataFrame([SDF_velocity,SDF_vertvelocity])
                 
                 #Results representation
-                if representation==True:
+                if representation:
                     plt.figure()
                     plt.subplot(211)
                     plt.plot(ratios_range[:j+1],missval,color='black',label='',alpha=0.5)
@@ -548,7 +548,7 @@ def RF_EM(df,ratio_threshold=np.nanmean(df.ratio),w_min=0,w_max=3*np.nanstd(df.r
                     plt.xlabel('Time (year-month)',fontsize=16)
                     plt.ylabel('Velocity (meters/day)',fontsize=16)
     
-            if save==True:
+            if save:
                 results.to_csv('RF_method.csv')
                 
     return results
@@ -613,7 +613,7 @@ def KMF(df,nbc_min=1,nbc_max=10,nb_cycles=5,standardisation=False,variables_impo
         when plotting the Sum of Squared Error (SSE) as function of the number of clusters, the elbow of the curve
         is the optimal one.
         '''
-        if standardisation==True:
+        if standardisation:
             data=standardisation(data)
         distortions = []
         K = range(nbc_min,nbc_max)
@@ -632,7 +632,7 @@ def KMF(df,nbc_min=1,nbc_max=10,nb_cycles=5,standardisation=False,variables_impo
         '''
         K-means algorithm
         '''
-        if standardisation==True:
+        if standardisation:
             data=standardisation(data)
 
         kmeans=KMeans(n_clusters=nbclusters) 
@@ -780,14 +780,14 @@ def KMF(df,nbc_min=1,nbc_max=10,nb_cycles=5,standardisation=False,variables_impo
     data_clustered,centroids,labels=K_means(KMF_data,nbclusters=optimal_nbclusters)
     print('K-Means clustering: done')
     data_clustered['time']=df.timestamp
-    if variables_importance==True:
+    if variables_importance:
         f_values=variables_importance(data_clustered)
     else:
         f_values='not determined'
     data_filtered=filt_kclusters(data_clustered)
     print('K-Means filtering: done')
     
-    if representation==True:
+    if representation:
         #Plot every points with the appropriate color, each one corresponding to a different cluster
         #A color vector is created to be sure that similar colors are not used several times.
         colors=["green","red","blue","orange","grey","black","yellow","purple","brown","pink"]
@@ -811,7 +811,7 @@ def KMF(df,nbc_min=1,nbc_max=10,nb_cycles=5,standardisation=False,variables_impo
     KMF_velocities=[]
     data_filtered=appropriate_datetime(data_filtered,freq='24H')
     KMF_velocity=velocity(data_filtered)
-    if representation==True:
+    if representation:
         plt.figure()
         plt.plot(KMF_velocity.index,KMF_velocity.iloc[:,0],color='black')
         plt.xlabel('Time (year-month)',fontsize=16)
@@ -852,7 +852,7 @@ def KMF(df,nbc_min=1,nbc_max=10,nb_cycles=5,standardisation=False,variables_impo
     nbdv=initial_length-final_length
     per_nbdv=(nbdv/initial_length)*100
     print('%d values removed' % nbdv,'(%.3f %% of the raw data)' % per_nbdv)
-    if save==True:
+    if save:
         KMF_velocity.to_csv('KMF_method.csv')
     
     return KMF_velocities,f_values
@@ -921,7 +921,7 @@ def EWS(df,w1=1.5,w2=0.5,t=5,representation=False,save=False):
     EWS_velocity=pd.DataFrame(EWS_velocity)
     EWS_velocity.index=df.resample('5S').mean().index[:-1]
     
-    if representation==True:
+    if representation:
         plt.figure()
         plt.plot(EWS_velocity.index,EWS_velocity)
     
@@ -933,7 +933,7 @@ def EWS(df,w1=1.5,w2=0.5,t=5,representation=False,save=False):
         print('KMF method processing time: %.3f minutes' % processing_time)
     if processing_time<60:
         print('KMF method processing time: %.3f seconds' % processing_time)
-    if save==True:
+    if save:
         EWS_velocity.to_csv('EWS_method.csv')
     return EWS_velocity
 
@@ -955,10 +955,10 @@ def GWS(df,w=60,representation=False,save=False):
     GWS_velocity=(np.sqrt(np.diff(X_smoothed)**2+np.diff(Y_smoothed)**2)/5)*4*24
     GWS_velocity=pd.DataFrame(GWS_velocity)
     GWS_velocity.index=data.index[:-1]
-    if representation==True:
+    if representation:
         plt.figure()
         plt.plot(GWS_velocity.index,GWS_velocity)
-    if save==True:
+    if save:
         GWS_velocity.to_csv('GWS_method.csv')
     return GWS_velocity
 
@@ -985,7 +985,7 @@ def KM2FA_DR(data,ratio_threshold=2,nbc_min=1,nbc_max=10,nbins=200,standardisati
             when plotting the Sum of Squared Error (SSE) as function of the number of clusters, the elbow of the curve
             is the optimal one.
             '''
-            if standardisation==True:
+            if standardisation:
                 data=standardisation(data)
             distortions = []
             K = range(nbc_min,nbc_max)
@@ -1004,7 +1004,7 @@ def KM2FA_DR(data,ratio_threshold=2,nbc_min=1,nbc_max=10,nbins=200,standardisati
             '''
             K-means algorithm
             '''
-            if standardisation==True:
+            if standardisation:
                 data=standardisation(data)
     
             kmeans=KMeans(n_clusters=nbclusters) 
@@ -1074,7 +1074,7 @@ def KM2FA_DR(data,ratio_threshold=2,nbc_min=1,nbc_max=10,nbins=200,standardisati
     print('Percentage of features in raw data: %.3f' % perc_features)
     KM2FA_data=pd.DataFrame({"X":features.X,"Y":features.Y,"time":features.timestamp,"global_sds":features.global_sd})
     features_characteristics=KM2FA_data.resample('1D').apply(KM2FA)
-    if representation==True:
+    if representation:
         legends=['Features duration (hours)','Features mean time of the day (hours)','Features mean ratio ($\o$)','Features mean number of satellites ($\o$)','Features mean Q ($\o$)','Features mean number of values ($\o$)']
         plt.figure()
         plt.suptitle('Features characteristics',fontsize=21)
@@ -1084,7 +1084,7 @@ def KM2FA_DR(data,ratio_threshold=2,nbc_min=1,nbc_max=10,nbins=200,standardisati
             plt.xlabel(legends[i-1],fontsize=16)
             plt.ylabel('Occurences ($\o$)',fontsize=16)
         plt.subplots_adjust(hspace=0.5)
-    if save==True:
+    if save:
         features_characteristics.to_csv('KM2FA_DR.csv')
     
     return features_characteristics
