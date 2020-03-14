@@ -6,7 +6,7 @@ import matplotlib.cm as cm
 from datetime import datetime, timedelta
 import time
 import pickle
-from kneed import KneeLocator #dhttps://github.com/arvkevi/kneed
+from kneed import KneeLocator #https://github.com/arvkevi/kneed
 from collections import Counter
 import scipy.stats as stats
 from scipy.stats import linregress
@@ -16,11 +16,14 @@ from scipy.spatial.distance import cdist
 
 
 ''' 
-This py file contains the methods developed (SDF,RF,KMF and KM2FA) and used (EWS and GWS) by Adrien Wehrlé during his internship at UiO (29th April 2019 — 28th June 2019)
-with Thomas Vikhamar Schuler as training supervisor. 
-For each method, the different steps are written below the initialization of all the functions needed. 
-For a detailed description of the methods, please see Adrien Wehrlé's internship report.
-Feel free to improve it!
+
+@author: Adrien Wehrlé, University of Oslo (UiO)
+
+Contains different developed (SDF,RF,KMF and KM2FA) and used (EWS and GWS) methods for GNSS post-processing.
+For each method, the different steps are run below the initialization of all needed functions. 
+For more informations, e.g. a detailed description of the methods, please see the report available here:
+https://github.com/AdrienWehrle/GNSS_post_processing/blob/master/WEHRLE_UiO_internship_report.pdf
+
 '''
 
 
