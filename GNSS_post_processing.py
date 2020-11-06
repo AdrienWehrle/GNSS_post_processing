@@ -344,10 +344,8 @@ def SDF_EM(df, sd_threshold=np.nanmean(df.global_sd), fq='24H', sampling_fq='1H'
     return results
 
 
-
-
 def RF_EM(df, ratio_threshold=np.nanmean(df.ratio), w_min=0, 
-          w_max=3*np.nanstd(df.ratio), w_step=0.5, temporal_resolution=False,
+          w_max=3 * np.nanstd(df.ratio), w_step=0.5, temporal_resolution=False,
           representation=False, save=False):
     ''' Determination of the RF method's optimal threshold (step 1) with the 
     help of the Elbow Method (from w_min to w_max each w_step) to compute daily 
