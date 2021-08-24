@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """ 
 
-@author: Adrien Wehrlé, University of Oslo (UiO)
+@author: Adrien Wehrlé, University of Oslo (UiO), 2019
 
 Contains different developed (SDF,RF,KMF and KM2FA) and used (EWS and GWS) 
 methods for GNSS post-processing. For each method, the different steps are run 
